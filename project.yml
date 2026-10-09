@@ -1,0 +1,57 @@
+name: RunnerGame
+options:
+  bundleIdPrefix: com.example
+  deploymentTarget:
+    macOS: "14.0"
+  createIntermediateGroups: true
+settings:
+  base:
+    SWIFT_VERSION: "5.9"
+    MARKETING_VERSION: "0.1.0"
+    CURRENT_PROJECT_VERSION: "1"
+    CODE_SIGN_STYLE: Manual
+    CODE_SIGN_IDENTITY: "-"
+    DEVELOPMENT_TEAM: ""
+targets:
+  RunnerGame:
+    type: application
+    platform: macOS
+    sources:
+      - RunnerGame
+    info:
+      path: RunnerGame/Resources/Info.plist
+      properties:
+        CFBundleDisplayName: RunnerGame
+        LSApplicationCategoryType: public.app-category.arcade-games
+        NSHumanReadableCopyright: "Copyright © 2026. All rights reserved."
+    entitlements:
+      path: RunnerGame/Resources/RunnerGame.entitlements
+      properties:
+        com.apple.security.app-sandbox: true
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.RunnerGame
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+  RunnerGameTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - RunnerGameTests
+    dependencies:
+      - target: RunnerGame
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.example.RunnerGameTests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  RunnerGame:
+    build:
+      targets:
+        RunnerGame: all
+        RunnerGameTests: [test]
+    run:
+      config: Debug
+    test:
+      config: Debug
+      targets:
+        - RunnerGameTests
